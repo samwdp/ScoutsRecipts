@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ScoutsRecipts</string>
+  <string name="child_tab">Children</string>
+  <string name="event_tab">Events</string>
 </resources>

@@ -12,16 +12,17 @@ namespace ScoutsRecipts
     {
 
         private Toolbar toolbar;
-        private Button addChild;
+        private Button addChild, viewChild;
         private EditText first, last, email, phone, parent;
         DatabaseAdapter databaseAdapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+
+            
 
             toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             first = FindViewById<EditText>(Resource.Id.fisrtName);
@@ -29,13 +30,19 @@ namespace ScoutsRecipts
             email = FindViewById<EditText>(Resource.Id.email);
             phone = FindViewById<EditText>(Resource.Id.phone);
             parent = FindViewById<EditText>(Resource.Id.parentName);
-            addChild = FindViewById<Button>(Resource.Id.addChild);
+            addChild = FindViewById<Button>(Resource.Id.addChildDB);
+            viewChild = FindViewById<Button>(Resource.Id.viewChildren);
             SetActionBar(toolbar);
 
             databaseAdapter = new DatabaseAdapter(this); 
 
             addChild.Click += (sender, e)=>{
                 AddChild();
+            };
+
+            viewChild.Click += (sender, e) =>
+            {
+                GetChildren();
             };
         }
 
@@ -55,7 +62,11 @@ namespace ScoutsRecipts
             {
                 Toast.MakeText(this, "Successful", ToastLength.Long).Show();
             }
-            
+        }
+
+        public void GetChildren()
+        {
+            Toast.MakeText(this, databaseAdapter.GetChildren(), ToastLength.Long);
         }
     } 
 }

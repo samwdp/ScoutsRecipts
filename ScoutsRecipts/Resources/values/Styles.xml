@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <style name="MyTheme" parent="android:style/Theme.Material.NoActionBar.Fullscreen">
+  <style name="MyTheme" parent="android:Theme.Material.NoActionBar.Fullscreen">
     <item name="android:colorPressedHighlight">@color/ListViewSelected</item>
     <item name="android:colorLongPressedHighlight">@color/ListViewHighlighted</item>
     <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
@@ -9,4 +9,5 @@
   </style>
   <color name="ListViewSelected">#96BCE3</color>
   <color name="ListViewHighlighted">#E39696</color>
+  
 </resources>

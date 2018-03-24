@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Database.Sqlite;
+using Android.Database;
 
 namespace Database
 {
@@ -35,7 +36,20 @@ namespace Database
             return id;
         }
 
-
+        public string GetChildren()
+        {
+            SQLiteDatabase db = helper.WritableDatabase;
+            String[] columns = { DBHelper.CHILD_FIRST_NAME, DBHelper.CHILD_LAST_NAME};
+            ICursor cursor = db.Query(DBHelper.CHILD_TABLE_NAME, columns, null, null,null,null, null);
+            StringBuilder sb = new StringBuilder();
+            while(cursor.MoveToNext())
+            {
+                String fName = cursor.GetString(cursor.GetColumnIndex(DBHelper.CHILD_FIRST_NAME));
+                String sName = cursor.GetString(cursor.GetColumnIndex(DBHelper.CHILD_LAST_NAME));
+                sb.Append(fName + " " + sName + "\n");
+            }
+            return sb.ToString();
+        }
 
 
         private class DBHelper : SQLiteOpenHelper
@@ -44,7 +58,7 @@ namespace Database
             public static string CHILD_TABLE_NAME = "Child";
             public static string EVENT_TABLE_NAME = "Event";
             public static string CHLD_TO_EVENT_LINK_TABLE_NAME = "Child_Event";
-            private static int VERSION_NUMBER = 1;
+            private static int VERSION_NUMBER = 2;
 
             //Child table columns
             private static string CHILD_ID = "child_id";
