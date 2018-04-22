@@ -54,6 +54,7 @@ namespace Database
                 ChildModel c = new ChildModel(fName, sName, sEmail, sPhone, sParentName);
                 children.Add(c);
             }
+            
             return children;
         }
 

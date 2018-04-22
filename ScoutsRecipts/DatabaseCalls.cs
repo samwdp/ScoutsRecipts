@@ -42,11 +42,8 @@ namespace ScoutsRecipts
         public static void GetChildren(Context context, DatabaseAdapter databaseAdapter)
         {
             var children = databaseAdapter.GetChildren();
-            foreach(ChildModel c in children)
-            {
-                Toast.MakeText(context, c.ToString(), ToastLength.Long);
-            }
-            
+            Toast.MakeText(context, "Successful", ToastLength.Long).Show();
+
         }
     }
 }

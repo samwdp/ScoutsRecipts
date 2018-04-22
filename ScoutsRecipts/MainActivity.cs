@@ -31,13 +31,19 @@ namespace ScoutsRecipts
             phone = FindViewById<EditText>(Resource.Id.phone);
             parent = FindViewById<EditText>(Resource.Id.parentName);
             addChild = FindViewById<Button>(Resource.Id.addChildDB);
+            viewChild = FindViewById<Button>(Resource.Id.getChildDB);
 
             SetActionBar(toolbar);
 
             databaseAdapter = new DatabaseAdapter(this); 
 
-            addChild.Click += (sender, e)=>{
-                //DatabaseCalls.AddChild(first.Text, last.Text, phone.Text, email.Text, parent.Text, this, databaseAdapter);
+            addChild.Click += (sender, e)=>
+            {
+                DatabaseCalls.AddChild(first.Text, last.Text, phone.Text, email.Text, parent.Text, this, databaseAdapter); 
+            };
+
+            viewChild.Click += (sender, e) =>
+            {
                 DatabaseCalls.GetChildren(this, databaseAdapter);
             };
 
