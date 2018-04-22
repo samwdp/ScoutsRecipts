@@ -63,17 +63,17 @@ namespace ScoutsRecipts
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070010
-			public const int addChild = 2131165200;
+			// aapt resource value: 0x7f07000f
+			public const int addChild = 2131165199;
 			
 			// aapt resource value: 0x7f07000a
 			public const int addChildDB = 2131165194;
 			
-			// aapt resource value: 0x7f07000d
-			public const int content_frame = 2131165197;
-			
 			// aapt resource value: 0x7f07000c
-			public const int drawer_layout = 2131165196;
+			public const int content_frame = 2131165196;
+			
+			// aapt resource value: 0x7f07000b
+			public const int drawer_layout = 2131165195;
 			
 			// aapt resource value: 0x7f070005
 			public const int email = 2131165189;
@@ -81,8 +81,8 @@ namespace ScoutsRecipts
 			// aapt resource value: 0x7f070001
 			public const int fisrtName = 2131165185;
 			
-			// aapt resource value: 0x7f07000e
-			public const int left_drawer = 2131165198;
+			// aapt resource value: 0x7f07000d
+			public const int left_drawer = 2131165197;
 			
 			// aapt resource value: 0x7f070009
 			public const int parentName = 2131165193;
@@ -108,11 +108,8 @@ namespace ScoutsRecipts
 			// aapt resource value: 0x7f070008
 			public const int textView5 = 2131165192;
 			
-			// aapt resource value: 0x7f07000f
-			public const int toolbar = 2131165199;
-			
-			// aapt resource value: 0x7f07000b
-			public const int viewChildren = 2131165195;
+			// aapt resource value: 0x7f07000e
+			public const int toolbar = 2131165198;
 			
 			static Id()
 			{

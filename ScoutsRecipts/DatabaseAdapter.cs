@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Database.Sqlite;
 using Android.Database;
+using Models;
 
 namespace Database
 {
@@ -36,19 +37,24 @@ namespace Database
             return id;
         }
 
-        public string GetChildren()
+        public List<ChildModel> GetChildren()
         {
             SQLiteDatabase db = helper.WritableDatabase;
-            String[] columns = { DBHelper.CHILD_FIRST_NAME, DBHelper.CHILD_LAST_NAME};
+            String[] columns = { DBHelper.CHILD_FIRST_NAME, DBHelper.CHILD_LAST_NAME, DBHelper.CHILD_EMAIL, DBHelper.CHILD_PHONE, DBHelper.CHILD_PARENT_NAME};
+            List<ChildModel> children = new List<ChildModel>();
             ICursor cursor = db.Query(DBHelper.CHILD_TABLE_NAME, columns, null, null,null,null, null);
             StringBuilder sb = new StringBuilder();
             while(cursor.MoveToNext())
             {
                 String fName = cursor.GetString(cursor.GetColumnIndex(DBHelper.CHILD_FIRST_NAME));
                 String sName = cursor.GetString(cursor.GetColumnIndex(DBHelper.CHILD_LAST_NAME));
-                sb.Append(fName + " " + sName + "\n");
+                String sEmail = cursor.GetString(cursor.GetColumnIndex(DBHelper.CHILD_EMAIL));
+                String sPhone = cursor.GetString(cursor.GetColumnIndex(DBHelper.CHILD_PHONE));
+                String sParentName = cursor.GetString(cursor.GetColumnIndex(DBHelper.CHILD_PARENT_NAME));
+                ChildModel c = new ChildModel(fName, sName, sEmail, sPhone, sParentName);
+                children.Add(c);
             }
-            return sb.ToString();
+            return children;
         }
 
 

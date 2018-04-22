@@ -31,43 +31,20 @@ namespace ScoutsRecipts
             phone = FindViewById<EditText>(Resource.Id.phone);
             parent = FindViewById<EditText>(Resource.Id.parentName);
             addChild = FindViewById<Button>(Resource.Id.addChildDB);
-            viewChild = FindViewById<Button>(Resource.Id.viewChildren);
+
             SetActionBar(toolbar);
 
             databaseAdapter = new DatabaseAdapter(this); 
 
             addChild.Click += (sender, e)=>{
-                AddChild();
+                //DatabaseCalls.AddChild(first.Text, last.Text, phone.Text, email.Text, parent.Text, this, databaseAdapter);
+                DatabaseCalls.GetChildren(this, databaseAdapter);
             };
 
-            viewChild.Click += (sender, e) =>
-            {
-                GetChildren();
-            };
+           
         }
 
-        public void AddChild()
-        {
-            string fisrtName = first.Text;
-            string secondName = last.Text;
-            string phoneN = phone.Text;
-            string memail = email.Text;
-            string parentName = parent.Text;
-            long id = databaseAdapter.InsertChild(fisrtName, secondName, memail, phoneN, parentName);
-            if (id < 0)
-            {
-                Toast.MakeText(this, "Unzuccessful", ToastLength.Long).Show();
-            }
-            else
-            {
-                Toast.MakeText(this, "Successful", ToastLength.Long).Show();
-            }
-        }
-
-        public void GetChildren()
-        {
-            Toast.MakeText(this, databaseAdapter.GetChildren(), ToastLength.Long);
-        }
+        
     } 
 }
 

@@ -63,9 +63,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/addChildDB" />
-  <Button
-        android:text="View Children"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewChildren" />
 </LinearLayout>
