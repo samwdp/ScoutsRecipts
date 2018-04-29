@@ -24,6 +24,7 @@ namespace Database
             helper = new DBHelper(context);
         }
 
+        //insterts
         public long InsertChild(string firstName, string lastName, string email, string phone, string parentName)
         {
             SQLiteDatabase db = helper.WritableDatabase;
@@ -37,13 +38,44 @@ namespace Database
             return id;
         }
 
+        public long InsertEvent(string name, string price, string time)
+        {
+            SQLiteDatabase db = helper.WritableDatabase;
+            ContentValues contentValues = new ContentValues();
+            contentValues.Put(DBHelper.EVENT_NAME, name);
+            contentValues.Put(DBHelper.EVENT_PRICE, price);
+            contentValues.Put(DBHelper.EVENT_DATE, time);
+            long id = db.Insert(DBHelper.EVENT_TABLE_NAME, null, contentValues);
+            return id;
+        }
+
+        public long InsertLinkTable(string childId, string eventID, string currentPaid)
+        {
+            SQLiteDatabase db = helper.WritableDatabase;
+            ContentValues contentValues = new ContentValues();
+            contentValues.Put(DBHelper.LINK_CHILD_ID, childId);
+            contentValues.Put(DBHelper.LINK_EVENT_ID, eventID);
+            contentValues.Put(DBHelper.LINK_CURRENT_PAID, currentPaid);
+            long id = db.Insert(DBHelper.CHLD_TO_EVENT_LINK_TABLE_NAME, null, contentValues);
+            return id;
+        }
+
+        public long UpdateCurrnetPaid(string currentPaid)
+        {
+            SQLiteDatabase db = helper.WritableDatabase;
+            ContentValues contentValues = new ContentValues();
+            contentValues.Put(DBHelper.LINK_CURRENT_PAID, currentPaid);
+            long id = db.Insert(DBHelper.CHLD_TO_EVENT_LINK_TABLE_NAME, null, contentValues);
+            return id;
+        }
+
+        //gets
         public List<ChildModel> GetChildren()
         {
             SQLiteDatabase db = helper.WritableDatabase;
             String[] columns = { DBHelper.CHILD_FIRST_NAME, DBHelper.CHILD_LAST_NAME, DBHelper.CHILD_EMAIL, DBHelper.CHILD_PHONE, DBHelper.CHILD_PARENT_NAME};
             List<ChildModel> children = new List<ChildModel>();
-            ICursor cursor = db.Query(DBHelper.CHILD_TABLE_NAME, columns, null, null,null,null, null);
-            StringBuilder sb = new StringBuilder();
+            ICursor cursor = db.Query(DBHelper.CHILD_TABLE_NAME, columns, null, null, null, null, null);
             while(cursor.MoveToNext())
             {
                 String fName = cursor.GetString(cursor.GetColumnIndex(DBHelper.CHILD_FIRST_NAME));
@@ -56,6 +88,23 @@ namespace Database
             }
             
             return children;
+        }
+
+        public List<EventModel> GetEvents()
+        {
+            SQLiteDatabase db = helper.WritableDatabase;
+            String[] colummns = { DBHelper.EVENT_NAME, DBHelper.EVENT_PRICE, DBHelper.EVENT_DATE};
+            List<EventModel> events = new List<EventModel>();
+            ICursor cursor = db.Query(DBHelper.EVENT_TABLE_NAME, colummns, null, null, null, null, null);
+            while(cursor.MoveToNext())
+            {
+                String name = cursor.GetString(cursor.GetColumnIndex(DBHelper.EVENT_NAME));
+                String price = cursor.GetString(cursor.GetColumnIndex(DBHelper.EVENT_PRICE));
+                String date = cursor.GetString(cursor.GetColumnIndex(DBHelper.EVENT_DATE));
+                EventModel e = new EventModel(name, price, date);
+                events.Add(e);
+            }
+            return events;
         }
 
 
